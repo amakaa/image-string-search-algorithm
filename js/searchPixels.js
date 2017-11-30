@@ -5,12 +5,13 @@ const searchImageForKnownInvaders = (radarImage, knownInvader) => {
   this.knownInvader = knownInvader;
 
   const handleImageSearch = {
+    splitPoint: '/',
     radarImageHashTable: [],
-    radarImageSplitByNewLine () {
-      return radarImage.split(/\n/);
+    radarImageSplitByNewLine() {
+      return radarImage.split(this.splitPoint)
     },
     knownInvaderSplitByNewLine () {
-      return knownInvader.split(/\n/)
+      return knownInvader.split(this.splitPoint)
     },
     radarImageIntoArrays () {
       return this.radarImageSplitByNewLine().map(imagePixel => imagePixel.split(''))
@@ -26,10 +27,11 @@ const searchImageForKnownInvaders = (radarImage, knownInvader) => {
       let concatImageArrayIndex = 0;
       let startingPosition = 0;
       let radarImageArray = [];
-      while (concatImageArrayIndex < this.concatRadarImageArray().length) {
+      const concatImageArray = this.concatRadarImageArray();
+      while (concatImageArrayIndex < concatImageArray.length) {
         radarImageArray.push(this.concatRadarImageArray()[concatImageArrayIndex]);
         concatImageArrayIndex++;
-        if (radarImageArray.length === this.knownInvaderIntoArrays()[0].length || concatImageArrayIndex > this.concatRadarImageArray().length - 1) {
+        if (radarImageArray.length === this.knownInvaderIntoArrays()[0].length || concatImageArrayIndex > concatImageArray.length - 1) {
           this.radarImageHashTable[startingPosition] = radarImageArray;
           startingPosition++;
           concatImageArrayIndex = startingPosition;
@@ -46,16 +48,17 @@ const searchImageForKnownInvaders = (radarImage, knownInvader) => {
       let knownInvaderIndex = 0;
       let matchesMade = [];
       let checkMatchesMade;
+      const knownInvaderIntoArrays = this.knownInvaderIntoArrays();
       while (this.radarImageHashTable[outerIndex] && innerIndex < this.radarImageHashTable[outerIndex].length) {
-        if (knownInvaderIndex >= this.knownInvaderIntoArrays().length) {
+        if (knownInvaderIndex >= knownInvaderIntoArrays.length) {
           break;
         }
 
-        if (this.knownInvaderIntoArrays()[knownInvaderIndex][innerIndex] !== this.radarImageHashTable[outerIndex][innerIndex]) {
+        if (knownInvaderIntoArrays[knownInvaderIndex][innerIndex] !== this.radarImageHashTable[outerIndex][innerIndex]) {
           outerIndex++;
           innerIndex = 0;
         } else if (innerIndex === this.radarImageHashTable[outerIndex].length - 1) {
-          outerIndex += this.knownInvaderIntoArrays()[knownInvaderIndex].length;
+          outerIndex += knownInvaderIntoArrays[knownInvaderIndex].length;
           matchesMade.push(knownInvaderIndex);
           knownInvaderIndex++;
           innerIndex = 0;

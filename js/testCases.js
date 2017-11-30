@@ -36,11 +36,11 @@ const checkForImageMatch = (expectedBool, receievedBool) => {
 }
 
 [handleSearch].forEach(function(f) {
-  testCases("Image is a match on one line", checkForImageMatch(true, f('weeeeeeee\nreeeeeeee\niieeyyeeee\nteeeeeeww', 'eeww')));
-  testCases("Image is a match", checkForImageMatch(true, f('weeeeeeeerd\nreeeeeeeeee\niieeyyeeeee\nteeeeeeeeee', 'reeeeeeeee\nteeeeeeeee')));
-  testCases("Image is not a match on one line", checkForImageMatch(false, f('weeeeeeeerd\nreeeeeeeeef\niieeyyeeeef\nteeeeeeeeef', 'eww')));
-  testCases("Image is not a match on multi line", checkForImageMatch(false, f('weeeeeeeerd\nreeeeeeeeef\niieeyyeeeef\nteeeeeeeeef', 'eww\nque')));
-  testCases("Image is a match on the outer edge", checkForImageMatch(true, f('wee\neee\neee\neee', 'eeeeeee\neeeeeee')));
+  testCases("Image is a match on one line", checkForImageMatch(true, f('weeeeeeee/reeeeeeee/iieeyyeeee/teeeeeeww', 'eeww')));
+  testCases("Image is a match", checkForImageMatch(true, f('weeeeeeeerd/reeeeeeeeee/iieeyyeeeee/teeeeeeeeee', 'reeeeeeeee/teeeeeeeee')));
+  testCases("Image is not a match on one line", checkForImageMatch(false, f('weeeeeeeerd/reeeeeeeeef/iieeyyeeeef/teeeeeeeeef', 'eww')));
+  testCases("Image is not a match on multi line", checkForImageMatch(false, f('weeeeeeeerd/reeeeeeeeef/iieeyyeeeef/teeeeeeeeef', 'eww/que')));
+  testCases("Image is a match on the outer edge", checkForImageMatch(true, f('wee/eee/eee/eee', 'eeeeeee/eeeeeee')));
 });
 
 reportResults();
