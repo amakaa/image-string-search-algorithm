@@ -27,11 +27,11 @@ const searchImageForKnownInvaders = (radarImage, knownInvader) => {
       let concatImageArrayIndex = 0;
       let startingPosition = 0;
       let radarImageArray = [];
-      const concatImageArray = this.concatRadarImageArray();
-      while (concatImageArrayIndex < concatImageArray.length) {
-        radarImageArray.push(this.concatRadarImageArray()[concatImageArrayIndex]);
+      const concatRadarImageArray = this.concatRadarImageArray();
+      while (concatImageArrayIndex < concatRadarImageArray.length) {
+        radarImageArray.push(concatRadarImageArray[concatImageArrayIndex]);
         concatImageArrayIndex++;
-        if (radarImageArray.length === this.knownInvaderIntoArrays()[0].length || concatImageArrayIndex > concatImageArray.length - 1) {
+        if (radarImageArray.length === this.knownInvaderIntoArrays()[0].length || concatImageArrayIndex > concatRadarImageArray.length - 1) {
           this.radarImageHashTable[startingPosition] = radarImageArray;
           startingPosition++;
           concatImageArrayIndex = startingPosition;
